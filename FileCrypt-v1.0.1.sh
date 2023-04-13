@@ -45,17 +45,17 @@ if [[ $option == 1 ]]
 		wipe -rf $dirname_var/archived_data.tar.gz 2>/dev/null
 		echo "[!] File encrypted successfully with name $dirname_var/encrypted_data.tar.gz.gpg"
 		read -p "[!] Do you want to delete files directory? (y/n): " question
-			if [ $question == "y" ]
-				then
-					wipe -rf $dirname_var/encrypted_data.tar.gz 2>/dev/null
-					wipe -rf $files 2>/dev/null
-					echo "[!] $files removed successfully."
-					exit
+		if [ $question == "y" ]
+			then
+				wipe -rf $dirname_var/encrypted_data.tar.gz 2>/dev/null
+				wipe -rf $files 2>/dev/null
+				echo "[!] $files removed successfully."
+				exit
                 elif [ $question == "n" ]
-					then
-						exit
+			then
+				exit
                 else
-					exit
+			exit
                 fi
 elif [[ $option == 2 ]]
 	then
@@ -65,14 +65,14 @@ elif [[ $option == 2 ]]
 		dirname_var_ex=$(dirname "$encfile")
 		foldername_var_ex=$(basename "$encfile")
 		gpg --batch --yes --passphrase "$encryptedpass" --output "$dirname_var_ex/decrypted_data.tar.gz" --decrypt "$encfile" 2>/dev/null
-			if [ $? -ne 0 ]
-				then
-					echo "Error: Incorrect password or corrupted file."
-					exit 1
-				else
-					wipe -rf $encfile 2>/dev/null
-					tar xvf $dirname_var_ex/decrypted_data.tar.gz -C $dirname_var_ex
-					wipe -rf $dirname_var_ex/decrypted_data.tar.gz 2>/dev/null
+		if [ $? -ne 0 ]
+			then
+				echo "Error: Incorrect password or corrupted file."
+				exit 1
+			else
+				wipe -rf $encfile 2>/dev/null
+				tar xvf $dirname_var_ex/decrypted_data.tar.gz -C $dirname_var_ex
+				wipe -rf $dirname_var_ex/decrypted_data.tar.gz 2>/dev/null
 			fi
 elif [[ $option == 3 ]]
 	then
